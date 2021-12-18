@@ -1,0 +1,8 @@
+[submodule "ops"]
+  path = ops
+  url = https://github.com/teaglebuilt/homeops.git
+
+[submodule "ware"]
+  path = ware
+  url = https://github.com/teaglebuilt/homeware.git
+
