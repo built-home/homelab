@@ -11,10 +11,14 @@ Destination for all homelab resource management
 * [**HomeOps**](https://github.com/teaglebuilt/homeops) - located under `ops` controlling all `gitops` cicd processes on the kubernetes cluster.
 * [**HomeWare**](https://github.com/teaglebuilt/homeware) - located under `ware` holding automation for provisioning all homelab infrastructure.
 * [**HomeAssistant**](https://github.com/teaglebuilt/homeassistant) - located under `assistant` which utilizes homeassistant to centralize and develop solutions for smart home operations.
+* [**Charts**](https://github.com/teaglebuilt/charts) - Packaged releases for kubernetes resources.
+
 
 ## Kubernetes
 
-Running on a cluster of rasperry pi's.
+Running on a cluster of rasperry pi's and a cluseter of virtual machines. Rancher is used to manage both clusters.
+
+![Kubernetes](./docs/img/home_k8s.png)
 
 
 ## CICD
