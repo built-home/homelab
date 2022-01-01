@@ -1,5 +1,12 @@
 # HOMELAB
 
+<div align="center">
+  <p>A self hosted environment for home services</p>
+  <p align="center">
+    <img src="https://github.com/teaglebuilt/homelab/blob/master/docs/img/homelab_logo.png" alt="Logo">
+  </p>
+</div>
+
 Destination for all homelab resource management
 
 * [**HomeOps**](https://github.com/teaglebuilt/homeops) - located under `ops` controlling all `gitops` cicd processes on the kubernetes cluster.
