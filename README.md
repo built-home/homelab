@@ -1,4 +1,3 @@
-# HOMELAB
 
 <div align="center">
   <p>A self hosted environment for home services</p>
