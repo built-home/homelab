@@ -1,10 +1,5 @@
 
-<div align="center">
-  <p>A self hosted environment for home services</p>
-  <p align="center">
-    <img src="https://github.com/teaglebuilt/homelab/blob/master/docs/img/homelab_logo.png" alt="Logo">
-  </p>
-</div>
+![Homelab](./docs/img/homelab_logo.png)
 
 Destination for all homelab resource management
 

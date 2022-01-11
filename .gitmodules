@@ -1,11 +1,11 @@
 [submodule "ops"]
 	path = ops
-	url = https://github.com/teaglebuilt/homeops
+	url = https://github.com/built-home/homeops
 
 [submodule "ware"]
 	path = ware
-	url = https://github.com/teaglebuilt/homeware
+	url = https://github.com/built-home/homeware
 
 [submodule "assistant"]
 	path = assistant
-	url = https://github.com/teaglebuilt/homeassistant
+	url = https://github.com/built-home/homeassistant
