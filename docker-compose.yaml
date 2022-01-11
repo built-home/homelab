@@ -23,8 +23,8 @@ services:
       TZ: "America/Chicago"
       WEBPASSWORD: "${PASSWORD}"
     volumes:
-      - "./etc-pihole/:/etc/pihole/"
-      - "./etc-dnsmasq.d/:/etc/dnsmasq.d/"
+      - "./services/pihole/etc/pihole:/etc/pihole/"
+      - "./services/pihole/etc/dnsmasq.d:/etc/dnsmasq.d/"
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
