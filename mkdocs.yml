@@ -4,3 +4,7 @@ theme:
   custom_dir: docs/theme
 nav:
   - Home: index.md
+  - Applications: applications.md
+  - Operating Systems: operating_systems.md
+  - Infrastructure: infrastructure.md
+  - Continuous Integration & Deployment: cicd.md

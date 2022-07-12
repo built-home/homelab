@@ -10,6 +10,28 @@ services:
     networks:
       - phantom-net
 
+  wireguard:
+    image: linuxserver/wireguard:latest
+    container_name: wireguard-client
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - ALLOWEDIPS=0.0.0.0/0
+    ports:
+      - "51820:51820/udp"
+      - "8112:8112"
+      - "6881:6881"
+      - "6881:6881/udp"
+    volumes:
+      - /lib/modules:/lib/modules
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+
   deluge:
     container_name: deluge
     image: linuxserver/deluge:latest
@@ -17,13 +39,11 @@ services:
     volumes:
       - ${STORAGE}/deluge/config:/config
       - ${STORAGE}/deluge/downloads:/downloads # Edit the Download directory in Preferences
-    expose:
-      - '8112'
+    network_mode: "service:wireguard"
     environment:
       DELUGE_LOGLEVEL: error
       PUID: 0
       PGID: 0
-      TZ: America/Chicago
       UMASK_SET: 022
     networks:
       - phantom-net
