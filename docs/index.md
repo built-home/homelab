@@ -8,77 +8,31 @@ An opensource and collaborative approach to building homelab's. The idea is to a
 
 `Built@Home` is intended to be used by the community or welcomes contributors to build our own community of homelab developers. If you are interested in empowering your home with IOT and smarthome technology, networking, kubernetes, data storage, all layers of security and lab testing, privacy in data storage and streaming, and empowering your home with applications, wifi performance, and telemetry and monitoring of all layers of homelab tech. Then this project is right for you.
 
-
 ## Architecture
 
-**Repositories**
+## Repositories
 
-1. HomeOps
-2. HomeWare
-3. HomeAssistant
-4. HomeController
-5. HomeOps-Webhook
-6. Crossplane Proxmox Provider
+### HomeOps
 
-### Hardware
+Continuous deployment of kubernetes workloads. All kubernetes definitions are in this repository using Kustomize. Flux is responsible for for deploying kubernetes resources, images, and updating cluster resources. The provisioning for the cluster hardware will be available in [HomeWare](), but provisioning for setting up `Flux`, `Sops`, and other tools are available in this repository.
 
-1. Unifi Dream Machine Pro
-2. Two Unifi Wifi 6 Access points (1 upstairs | 1 downstairs)
-3. Virtualization Server
-  - Supermicro Motherboard M11....
-  - 2 64GB Memory sticks
-  - 1TB SSD nvme.2 disk drive
-4. Raspberry Pi
-  - 1 8gb raspberry pi 4
-  - 1 4gb raspberry pi 4
-  - 1 4gb raspberry pi 3
-  - 3 PoE raspberryPi adapters
-  - 1 PoE switch
+### HomeWare
 
-### Infrastructure
+[Ansible](), [Terraform](), and [Packer]() are used to provision different infrastructure for `Built@Home`. This is the first repository that will be used to automate the setup of the homelab.
 
-1. **Kubernetes** - Running a 3 Node K3s cluster on raspberry pi with Ubuntu 20.04 OS.
-2. **Proxmox** - Running virtual host machines and LXC Containers.
-3. **Portainer** - Have not decided where to host portainer yet, but it is strickly a docker host running containers. This will probably run on an old 2011 4gb macbook pro. This will make sense when learning about the operations that the containers will perform.
+**Ansible**
+1. `K3s` - provisions a k3s cluster on raspberry pis. (Refer to hardware for specifics)
+2. `Unifi` - provision dream machine pro, access points, with unifi tools.
+3. `Proxmox` - generally, proxmox is mostly controlled by terraform. Although, terraform will call specific playbooks for provisioning after a `VM` or `LXC` container for controlling additional tasks.
 
-### Deployment
+**Packer**
+Packer is used for creating actual images that can be used for creating virtual machines.
 
-`built@home` uses gitops principles to deploying changes in the homelab. Below, are the components that orchestrate the deployment of homelab resources.
+**Terraform**
+Terraform uses the [Proxmox Provider]() with [CloudInit]() to launch images created by packer.
 
-1. **Kubernetes** - [Flux]() is used with [Kustomize]
-() to perform continuous integration and deployment of kubernetes workloads. With kustomize, we can seperate workloads by environments by using a layering approach in our templates to define a base layer, and then additional layers that contain differences.
+### HomeAssistant
+### HomeController
+### HomeOps Webhook
+### Crossplane Proxmox Provider
 
-**Example**:
-```sh
-clusters/
-  base/ <---similarities between dev and prod
-  dev/ <--- additional changes on top of base
-  prod/ <--- additional changes on top of base
-```
-
-When testing new resources, there is a cicd process to control deploying resources that are not using kustomize and a cicd process to clean up any resources that were deployed when migrating over to kustomize.
-
-**Example**:
-
-If we test deploying a new helm chart, once we configure the settings, we are ready to move it over to kustomize. There is an [action]() that will make sure to remove the helm chart and other related resources before flux deploys the new release.
-
-2. **Ansible**
-
-Primarily used to automate the setup of hardware. The list below contains the playbooks available.
-
-  *  Setup of OS and settings on raspberryPi
-  *  Setup / Teardown / Reset of K3s Cluster
-  *  Setup of Flux, GPG, and SOPS on K3s Master
-
-### Continious Integration
-
-[Github Actions]() is used for all automation of resource management, testing, integrations, and some deployment processes. The kubernetes cluster has a [github actions controller]() which can optionally run all the CICD processes. Below is a list of workflows used and available in the homelab.
-
-
-  * **HomeOps**
-    - Upgrade Flux
-    - [Renovate]()
-    - Linting
-  * **HomeWare**
-    - Linting playbooks
-  * HomeAssistant
