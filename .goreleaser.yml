@@ -1,5 +1,5 @@
 builds:
-  - binary: bin/homelab
+  - binary: homelab
     goos:
       - darwin
       - linux
@@ -19,11 +19,11 @@ universal_binaries:
 
 brews:
   -
-    name: built@home 
+    name: homelab 
     homepage: https://github.com/built-home/homelab
     tap:
       owner: built@home
-      name: Dillan Teagle
+      name: homelab
     commit_author:
       name: teaglebuilt
       email: dillan.teagle.va@gmail.com
